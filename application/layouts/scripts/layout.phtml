@@ -1,0 +1,12 @@
+<head>
+	<?php
+    echo $this -> headTitle();
+?>
+</head>
+<body>
+        <?php echo $this->render('_header.phtml')?>
+		<div style="background-color: #EEEEEE; height: 40px;">
+		<?php echo $this -> layout() -> content; ?>
+		<?php echo $this->render('_footer.phtml')
+		?>
+</body>

@@ -13,10 +13,12 @@ set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),
     get_include_path(),
 )));
-
+if (file_exists('../vendor/autoload.php')) {
+    require_once '../vendor/autoload.php';
+} else {
 /** Zend_Application */
 require_once 'Zend/Application.php';
-
+}
 // Create application, bootstrap, and run
 $application = new Zend_Application(
     APPLICATION_ENV,

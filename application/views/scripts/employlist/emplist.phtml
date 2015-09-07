@@ -1,0 +1,64 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php
+//Use to apply css on a calender text field..
+echo $this -> headLink() -> appendStylesheet("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css");
+//Use to apply jQuery so that
+echo $this -> headScript() -> appendFile("http://code.jquery.com/jquery-1.9.1.js");
+echo $this -> headScript() -> appendFile("http://code.jquery.com/ui/1.10.3/jquery-ui.js");
+//Use to view the form
+echo $this -> form;
+?>
+<script type="text/javascript">
+	//Apply jQuery to change the text field  into calender format
+	$(document).ready(function() {
+		/* assuming that text input datePicker would have id='datePicker' */
+		$("#startDate").datepicker({
+			dateFormat : 'yy-mm-dd'
+		});
+		$("#endDate").datepicker({
+			dateFormat : 'yy-mm-dd'
+		});
+
+		//to send the value of chkfield to the form
+		$('input[name="emp_chk"]').click(function() {
+			var checkedValues = $('input:checkbox:checked').map(function() {
+				return this.value;
+			}).get();
+			$('#emp_list').val(checkedValues);
+		});
+	});
+</script>
+<h1 align=center>Employ Details</h1>
+<table class="table table-striped" border= "2" align=center>
+    <tr>
+	    <th></th>
+	    <th>S.no</th>
+	    <th>Emp_Id</th>
+	    <th>Emp_Name</th>
+	    <th>Date of Joining</th>
+	    <th>Emp_Code</th>
+	    <th>Email_id</th>
+    </tr>
+<?php
+$i=1;
+foreach ($this->showDetails as $row) {?>
+<!--Getting the values from the entity-->
+    <tr>
+	    <td><input type="checkbox" name="emp_chk" id="emp_chk" value="<?php echo $row -> getEmpId(); ?>"></td>
+	    <td><?php echo $i++; ?></td>
+	    <td><?php echo $row -> getEmpId(); ?></td>
+	    <td><?php echo $row -> getUsername(); ?></td>
+	    <td><?php echo $row -> getDateOfJoin() -> format('Y-m-d'); ?></td>
+	    <td><?php echo $row -> getEmployeeCode(); ?></td>
+	    <td><?php echo $row -> getEmail(); ?></td>
+<?php
+}
+?>
+</table>
